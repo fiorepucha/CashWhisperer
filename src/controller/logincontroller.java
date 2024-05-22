@@ -23,6 +23,8 @@ public class logincontroller implements Initializable {
     @FXML
     private Button btnLogin;
 
+    @FXML
+    private Button btnRegistrer;
 
     @FXML
     private ImageView imgLogin;
@@ -41,6 +43,7 @@ public class logincontroller implements Initializable {
         imgTransition.setByX(-300);
         imgTransition.play();
     }
+
 
     @FXML
     void transicionLoginInversa(ActionEvent event) {
@@ -64,6 +67,11 @@ public class logincontroller implements Initializable {
             e.printStackTrace();
         }
 
+
+    }
+
+    @FXML
+    void Registrar(ActionEvent event) {
 
     }
 
