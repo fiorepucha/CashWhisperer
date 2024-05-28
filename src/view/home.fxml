@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="800.0" style="-fx-border-radius: 0 15 15 0; -fx-background-radius: 0 15 15 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home">
+<AnchorPane prefHeight="540.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Home">
    <children>
-      <Pane layoutY="35.0" prefHeight="470.0" prefWidth="168.0" style="-fx-background-color: #DDDDDD;">
+      <Pane fx:id="paneMenu" layoutY="35.0" prefHeight="480.0" prefWidth="168.0" stylesheets="@../estilos/styleHome.css">
          <children>
-            <Button layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Ingresos" />
+            <Button layoutY="192.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Ingresos" />
             <Button layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Button" />
             <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -23,7 +23,7 @@
             </ImageView>
             <Button layoutY="139.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Gastos" />
             <Button layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="168.0" text="Button" />
-            <ImageView fitHeight="79.0" fitWidth="72.0" layoutX="48.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="54.0" fitWidth="43.0" layoutX="63.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/personaSimbolo.png" />
                </image>
@@ -35,12 +35,11 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <TableView layoutX="586.0" layoutY="63.0" prefHeight="414.0" prefWidth="200.0">
+      <TableView fx:id="tableMovimientos" layoutX="586.0" layoutY="63.0" prefHeight="414.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <Pane layoutX="282.0" layoutY="98.0" prefHeight="142.0" prefWidth="200.0" style="-fx-border-radius: 20px; -fx-background-color: pink; -fx-background-radius: 20px;" />
    </children>
 </AnchorPane>

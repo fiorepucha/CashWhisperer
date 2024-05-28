@@ -1,0 +1,15 @@
+#paneMenu {
+    -fx-background-color: #ebebed;
+    -fx-border-radius: 0 50px 50px 0; /* solo las esquinas derecha superior e inferior */
+    -fx-background-radius: 0 50px 50px 0; /* aplicar el mismo radio de esquina al fondo */
+    -fx-padding: 10px; /* margen interno para el contenido */
+    /*-fx-pref-height: 150px; /* altura preferida del pane */
+    /*-fx-pref-width: 150px; /* anchura preferida del pane */
+}
+#tableMovimientos{
+  -fx-background-color: #ebebed;
+    -fx-border-radius: 20px 20px 20px 20px; /* solo las esquinas derecha superior e inferior */
+    -fx-background-radius:20px 20px 20px 20px; /* aplicar el mismo radio de esquina al fondo */
+    -fx-padding: 10px; /* margen interno para el contenido */
+
+}

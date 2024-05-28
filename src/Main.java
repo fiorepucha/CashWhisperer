@@ -18,6 +18,5 @@ public class Main extends Application {
         stage.setTitle("Cash Whisperer");
         stage.show();
 
-
     }
 }
