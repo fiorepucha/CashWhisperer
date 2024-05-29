@@ -8,8 +8,43 @@
 }
 #tableMovimientos{
   -fx-background-color: #ebebed;
-    -fx-border-radius: 20px 20px 20px 20px; /* solo las esquinas derecha superior e inferior */
-    -fx-background-radius:20px 20px 20px 20px; /* aplicar el mismo radio de esquina al fondo */
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius:15px 15px 15px 15px;
     -fx-padding: 10px; /* margen interno para el contenido */
 
 }
+
+#btnGastos,#btnIngresos{
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border: 0px;
+    -fx-background-color: #ebebed;
+}
+
+#btnGastos:hover,#btnIngresos:hover{
+    -fx-background-color: white;
+    -fx-border-width: 0px 0px 0px 4px;
+    -fx-border-color: #f538ff;
+
+}
+
+#paneSaldo{
+    -fx-background-color: linear-gradient(to right, #CC94D6,#309DD8);
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius:15px 15px 15px 15px;
+}
+#lblSaldo{
+    -fx-text-fill: white;
+}
+
+#paneResumGastos{
+    -fx-background-color: linear-gradient(to right, #f6e3fa,#e598f5);
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius:15px 15px 15px 15px;
+}
+#paneResumIngresos{
+    -fx-background-color: linear-gradient(to right, #deeefa,#8faef2);
+    -fx-border-radius: 15px 15px 15px 15px;
+    -fx-background-radius:15px 15px 15px 15px;
+}
+
