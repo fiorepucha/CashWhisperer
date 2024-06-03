@@ -1,0 +1,22 @@
+#paneMenu {
+    -fx-background-color: #ebebed;
+    -fx-border-radius: 0 50px 50px 0; /* solo las esquinas derecha superior e inferior */
+    -fx-background-radius: 0 50px 50px 0; /* aplicar el mismo radio de esquina al fondo */
+    -fx-padding: 10px; /* margen interno para el contenido */
+    /*-fx-pref-height: 150px; /* altura preferida del pane */
+    /*-fx-pref-width: 150px; /* anchura preferida del pane */
+}
+
+#btnGastos,#btnIngresos,#btnHome{
+    -fx-border-radius: 0px;
+    -fx-background-radius: 0px;
+    -fx-border: 0px;
+    -fx-background-color: #ebebed;
+}
+
+
+#btnGastos,#btnIngresos:hover,#btnHome:hover{
+    -fx-background-color: white;
+    -fx-border-width: 0px 0px 0px 4px;
+    -fx-border-color: #f538ff;
+}

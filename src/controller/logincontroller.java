@@ -8,9 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -43,6 +41,9 @@ public class logincontroller implements Initializable {
     @FXML
     private TextField txtRegistrerUsername;
 
+    @FXML
+    private PasswordField pswdContrasenya;
+
 
     @FXML
     void transicionLogin(ActionEvent event) { //la imagen se moverá hasta el borde izquierdo de la ventana
@@ -61,28 +62,35 @@ public class logincontroller implements Initializable {
 
     @FXML
     void login(ActionEvent event) {
-        Users user = new Users(txtLoginUsername.getText());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
-        Parent root;
+        if(txtLoginUsername.getText().isEmpty() || pswdContrasenya.getText().isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, rellene todos los campos");
+            alert.showAndWait();
 
-        try {
-            root = loader.load();
-            Home homeController = loader.getController();
-            homeController.setUsuarioActual(user);
-            System.out.println(user);
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        }else {
+            Users user = new Users(txtLoginUsername.getText());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
+            Parent root;
+
+            try {
+                root = loader.load();
+                Home homeController = loader.getController();
+                homeController.setUsuarioActual(user);
+                System.out.println("nombre: "+user.getUsername());
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-
     }
 
     @FXML
     void Registrar(ActionEvent event) {
+        Users user = new Users(txtLoginUsername.getText());
+
 
     }
 

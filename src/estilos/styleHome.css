@@ -11,17 +11,16 @@
     -fx-border-radius: 15px 15px 15px 15px;
     -fx-background-radius:15px 15px 15px 15px;
     -fx-padding: 10px; /* margen interno para el contenido */
-
 }
 
-#btnGastos,#btnIngresos{
+#btnGastos,#btnIngresos,#btnHome{
     -fx-border-radius: 0px;
     -fx-background-radius: 0px;
     -fx-border: 0px;
     -fx-background-color: #ebebed;
 }
 
-#btnGastos:hover,#btnIngresos:hover{
+#btnGastos:hover,#btnIngresos:hover,#btnHome{
     -fx-background-color: white;
     -fx-border-width: 0px 0px 0px 4px;
     -fx-border-color: #f538ff;
@@ -33,8 +32,10 @@
     -fx-border-radius: 15px 15px 15px 15px;
     -fx-background-radius:15px 15px 15px 15px;
 }
-#lblSaldo{
+#lblSaldo,#lblResumenGastos,#lblResumenIngresos,#lblNumeroGastos,#lblNumeroIngresos{
+    -fx-text-align:center;
     -fx-text-fill: white;
+    -fx-font-weigth:bold;
 }
 
 #paneResumGastos{
