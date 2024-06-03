@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Users;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -68,7 +70,7 @@ public class logincontroller implements Initializable {
             alert.showAndWait();
 
         }else {
-            Users user = new Users(txtLoginUsername.getText());
+            Users user = new Users(txtLoginUsername.getText(), pswdContrasenya.getText());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
             Parent root;
 
@@ -89,10 +91,20 @@ public class logincontroller implements Initializable {
 
     @FXML
     void Registrar(ActionEvent event) {
-        Users user = new Users(txtLoginUsername.getText());
+        Users user = new Users(txtLoginUsername.getText(), pswdContrasenya.getText());
 
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
 
+        try {
+            FileWriter writer = new FileWriter("usuarios.json");
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

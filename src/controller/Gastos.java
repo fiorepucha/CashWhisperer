@@ -30,6 +30,46 @@ public class Gastos {
 
     @FXML
     private Pane paneMenu;
+
+    @FXML
+    private Pane paneNumeroGastos;
+
+    @FXML
+    private Label lblNumeroUsuarioGastos;
+
+    @FXML
+    private Button btnTeclado1;
+
+    @FXML
+    private Button btnTeclado2;
+
+    @FXML
+    private Button btnTeclado3;
+
+    @FXML
+    private Button btnTeclado4;
+
+    @FXML
+    private Button btnTeclado5;
+
+    @FXML
+    private Button btnTeclado6;
+
+    @FXML
+    private Button btnTeclado7;
+
+    @FXML
+    private Button btnTeclado8;
+
+    @FXML
+    private Button btnTeclado9;
+
+    @FXML
+    private Button btnTecladoComa;
+
+    @FXML
+    private Button btnTecladoDelete;
+
     private Users usuarioActual;
 
 

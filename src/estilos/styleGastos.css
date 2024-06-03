@@ -20,3 +20,26 @@
     -fx-border-width: 0px 0px 0px 4px;
     -fx-border-color: #f538ff;
 }
+
+#paneNumeroGastos{
+    -fx-background-color: #ebebed;
+    /*bordes de varios colores*/
+    -fx-border-color: #f538ff;
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
+    -fx-background-radius: 50px 50px 50px 50px;
+    -fx-padding: 10px; /* margen interno para el contenido */
+}
+
+#btnTeclado1:hover,#btnTeclado2:hover,#btnTeclado3:hover,#btnTeclado4:hover,#btnTeclado5:hover,#btnTeclado6:hover,#btnTeclado7:hover,#btnTeclado8:hover,#btnTeclado9:hover,#btnTeclado0:hover,#btnTecladoComa:hover,#btnTecladoDelete:hover{
+    -fx-background-color: linear-gradient(to right, #EED3F3,#C4E8FB);
+}
+#btnTeclado1,#btnTeclado2,#btnTeclado3,#btnTeclado4,#btnTeclado5,#btnTeclado6,#btnTeclado7,#btnTeclado8,#btnTeclado9,#btnTeclado0,#btnTecladoComa,#btnTecladoDelete{
+    -fx-background-color:white;
+}
+
+
+
+
+
+
