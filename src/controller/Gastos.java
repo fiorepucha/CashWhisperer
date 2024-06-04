@@ -3,18 +3,25 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Categorias;
 import model.Users;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Gastos {
+import model.Categorias;
+
+public class Gastos implements Initializable {
 
     @FXML
     private Button btnGastos;
@@ -70,6 +77,13 @@ public class Gastos {
     @FXML
     private Button btnTecladoDelete;
 
+    @FXML
+    private ComboBox<Categorias> cboxCategorias;
+
+    @FXML
+    private Button btnAnyadirGasto;
+
+
     private Users usuarioActual;
 
 
@@ -99,5 +113,12 @@ public class Gastos {
 
     }
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        cboxCategorias.getItems().addAll(Categorias.values());
+
+
+    }
 }
 

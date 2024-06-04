@@ -1,0 +1,5 @@
+package model;
+
+public enum Categorias {
+    TRAVEL, FOOD, CLOTHING, ENTERTAINMENT, SHOPPING, HOUSING, GIFTS, TRANSPORTATION, OTHERS
+}

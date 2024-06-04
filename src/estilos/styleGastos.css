@@ -24,7 +24,7 @@
 #paneNumeroGastos{
     -fx-background-color: #ebebed;
     /*bordes de varios colores*/
-    -fx-border-color: #f538ff;
+    -fx-border-color:linear-gradient(to right, #f547c9,#1432f7);
     -fx-border-width: 4px 4px 4px 4px;
     -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
     -fx-background-radius: 50px 50px 50px 50px;
@@ -38,7 +38,27 @@
     -fx-background-color:white;
 }
 
+#cboxCategorias{
+    -fx-background-color: #1634f7;
+    -fx-color: white;
+    /*bordes de varios colores*/
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
+    -fx-background-radius: 50px 50px 50px 50px;
+    -fx-padding: 10px; /* margen interno para el contenido */
+}
 
+#btnAnyadirGasto:hover{
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
+    -fx-background-radius: 50px 50px 50px 50px;
+    -fx-padding: 10px; /* margen interno para el contenido */
+    -fx-blackground-color:linear-gradient(to right, #e4e6f2,#aeb8f5);
+
+}
+#btnAnyadirGasto:pressed{
+    -fx-blackground-color:linear-gradient(to right, #4058ed,#0928e6);
+}
 
 
 
