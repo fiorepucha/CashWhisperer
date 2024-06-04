@@ -83,6 +83,107 @@ public class Gastos implements Initializable {
     @FXML
     private Button btnAnyadirGasto;
 
+    @FXML
+    void agregarComa(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        String cadenaSinEuros="";
+        if (cadena.equals("0€") || cadena.equals("0.0€")) {
+            lblNumeroUsuarioGastos.setText("0.0€");
+        }else{
+            cadenaSinEuros = cadena.substring(0, cadena.length()-1);
+            lblNumeroUsuarioGastos.setText(cadenaSinEuros + ".€");
+
+        }
+
+    }
+
+    @FXML
+    void agregarDigito0(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,0);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito1(ActionEvent event) {
+       String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,1);
+        lblNumeroUsuarioGastos.setText(cadena);
+    }
+
+    @FXML
+    void agregarDigito2(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,2);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito3(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,3);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito4(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,4);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito5(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,5);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito6(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,6);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito7(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,7);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito8(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,8);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void agregarDigito9(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = agregarDigito(cadena,9);
+        lblNumeroUsuarioGastos.setText(cadena);
+
+    }
+
+    @FXML
+    void eliminarDigito(ActionEvent event) {
+        String cadena = lblNumeroUsuarioGastos.getText();
+        cadena = cadena.substring(0, (cadena.length() - 2));
+        lblNumeroUsuarioGastos.setText(cadena+"€");
+
+    }
+
 
     private Users usuarioActual;
 
@@ -117,8 +218,16 @@ public class Gastos implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cboxCategorias.getItems().addAll(Categorias.values());
+    }
 
-
+    public static String agregarDigito(String cadena, int digito) {
+        if (cadena.equals("0€") || cadena.equals("")) {
+            return digito + "€";
+        } else {
+            String cadenaSinEuros="";
+            cadenaSinEuros = cadena.substring(0, cadena.length() - 1);
+            return cadenaSinEuros + digito + "€";
+        }
     }
 }
 

@@ -53,14 +53,9 @@
       </Label>
       <Pane fx:id="paneNumeroGastos" layoutX="263.0" layoutY="112.0" prefHeight="74.0" prefWidth="294.0">
          <children>
-            <Label fx:id="lblNumeroUsuarioGastos" layoutX="63.0" layoutY="20.0" prefHeight="6.0" prefWidth="168.0" text="45,00">
+            <Label fx:id="lblNumeroUsuarioGastos" layoutX="63.0" layoutY="20.0" prefHeight="6.0" prefWidth="168.0" text="0€">
                <font>
                   <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="258.0" layoutY="20.0" text="€">
-               <font>
-                  <Font size="24.0" />
                </font>
             </Label>
          </children>
@@ -78,62 +73,62 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnTeclado1" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="1">
+            <Button fx:id="btnTeclado1" mnemonicParsing="false" onAction="#agregarDigito1" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado2" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="2" GridPane.columnIndex="1">
+            <Button fx:id="btnTeclado2" mnemonicParsing="false" onAction="#agregarDigito2" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="2" GridPane.columnIndex="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado3" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="3" GridPane.columnIndex="2">
+            <Button fx:id="btnTeclado3" mnemonicParsing="false" onAction="#agregarDigito3" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="3" GridPane.columnIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado4" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="4" GridPane.rowIndex="1">
+            <Button fx:id="btnTeclado4" mnemonicParsing="false" onAction="#agregarDigito4" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="4" GridPane.rowIndex="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado5" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="btnTeclado5" mnemonicParsing="false" onAction="#agregarDigito5" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado6" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="btnTeclado6" mnemonicParsing="false" onAction="#agregarDigito6" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado7" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="7" GridPane.rowIndex="2">
+            <Button fx:id="btnTeclado7" mnemonicParsing="false" onAction="#agregarDigito7" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="7" GridPane.rowIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado8" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Button fx:id="btnTeclado8" mnemonicParsing="false" onAction="#agregarDigito8" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado9" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Button fx:id="btnTeclado9" mnemonicParsing="false" onAction="#agregarDigito9" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTecladoDelete" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="DEL" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Button fx:id="btnTecladoDelete" mnemonicParsing="false" onAction="#eliminarDigito" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="DEL" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTecladoComa" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="," GridPane.rowIndex="3">
+            <Button fx:id="btnTecladoComa" mnemonicParsing="false" onAction="#agregarComa" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="," GridPane.rowIndex="3">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnTeclado0" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Button fx:id="btnTeclado0" mnemonicParsing="false" onAction="#agregarDigito0" prefHeight="70.0" prefWidth="100.0" stylesheets="@../estilos/styleGastos.css" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="24.0" />
                </font>
