@@ -17,8 +17,8 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLoginUsername" layoutX="40.0" layoutY="149.0" prefHeight="30.0" prefWidth="230.0" promptText="👤  Username" text="fiore" />
-      <PasswordField fx:id="pswdContrasenya" layoutX="40.0" layoutY="235.0" prefHeight="30.0" prefWidth="230.0" promptText="🔒 Password " text="1234" />
+      <TextField fx:id="txtLoginUsername" layoutX="40.0" layoutY="149.0" prefHeight="30.0" prefWidth="230.0" promptText="👤  Username" />
+      <PasswordField fx:id="pswdContrasenya" layoutX="40.0" layoutY="235.0" prefHeight="30.0" prefWidth="230.0" promptText="🔒 Password " />
       <Button fx:id="btnLogin" layoutX="46.0" layoutY="313.0" mnemonicParsing="false" onAction="#login" prefHeight="26.0" prefWidth="218.0" stylesheets="@../estilos/style.css" text="Login" textFill="WHITE" />
       <TextField fx:id="txtRegistrerUsername" layoutX="338.0" layoutY="149.0" prefHeight="30.0" prefWidth="230.0" promptText="👤 Username" />
       <Label alignment="CENTER" layoutX="341.0" layoutY="41.0" prefHeight="30.0" prefWidth="218.0" styleClass="btnLogin" text="CREATE ACCOUNT" textFill="#9645b4">
@@ -26,12 +26,12 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <PasswordField layoutX="335.0" layoutY="235.0" prefHeight="30.0" prefWidth="230.0" promptText="🔒 Password" />
-      <Button fx:id="btnRegistrer" layoutX="341.0" layoutY="313.0" mnemonicParsing="false" onAction="#Registrar" prefHeight="26.0" prefWidth="218.0" stylesheets="@../estilos/style.css" text="Registrer" textFill="WHITE" />
+      <PasswordField fx:id="pswdRegistrerContrasenya" layoutX="335.0" layoutY="235.0" prefHeight="30.0" prefWidth="230.0" promptText="🔒 Password" />
+      <Button fx:id="btnRegistrer" layoutX="341.0" layoutY="313.0" mnemonicParsing="false" onAction="#registrar" prefHeight="26.0" prefWidth="218.0" stylesheets="@../estilos/style.css" text="Registrer" textFill="WHITE" />
       <Label layoutX="101.0" layoutY="381.0" prefHeight="18.0" prefWidth="150.0" text="Have not account yet?" />
       <Hyperlink fx:id="lnkSignUp" layoutX="123.0" layoutY="429.0" onAction="#transicionLogin" text="SIGN UP" />
       <Label layoutX="381.0" layoutY="381.0" prefHeight="18.0" prefWidth="174.0" text="Have an account already?" />
-      <Hyperlink fx:id="lnkLogin" layoutX="443.0" layoutY="429.0" onAction="#transicionLoginInversa" text="LOGIN" />
+      <Hyperlink fx:id="lnkLogin" layoutX="428.0" layoutY="429.0" onAction="#transicionLoginInversa" text="LOGIN" />
       <ImageView fx:id="imgLogin" fitHeight="500.0" fitWidth="600.0" layoutX="300.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/ImagenLogin.png" />

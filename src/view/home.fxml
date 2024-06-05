@@ -19,25 +19,25 @@
                   <Image url="@../img/btnLogout.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnGastos" layoutX="1.0" layoutY="197.0" mnemonicParsing="false" onAction="#abrirVentanaGastos" prefHeight="50.0" prefWidth="168.0" text="Expenses" />
+            <Button fx:id="btnGastos" layoutY="187.0" mnemonicParsing="false" onAction="#abrirVentanaGastos" prefHeight="50.0" prefWidth="168.0" text="Expenses" />
             <ImageView fitHeight="54.0" fitWidth="43.0" layoutX="63.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/personaSimbolo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnIngresos" layoutX="1.0" layoutY="247.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="168.0" text="Income" />
-            <ImageView fitHeight="22.0" fitWidth="17.0" layoutX="23.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="btnIngresos" layoutY="238.0" mnemonicParsing="false" onAction="#abrirVentanaIngresos" prefHeight="50.0" prefWidth="168.0" text="Income" />
+            <ImageView fitHeight="22.0" fitWidth="17.0" layoutX="23.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/imgIngresos.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="23.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="23.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/imgGastos.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnHome" layoutY="154.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="168.0" text="Home" />
-            <ImageView fitHeight="30.0" fitWidth="17.0" layoutX="23.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="btnHome" layoutY="136.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="168.0" text="Home" />
+            <ImageView fitHeight="30.0" fitWidth="17.0" layoutX="23.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/imgHome.png" />
                </image>
@@ -57,12 +57,12 @@
       </TableView>
       <Pane fx:id="paneSaldo" layoutX="208.0" layoutY="95.0" prefHeight="102.0" prefWidth="347.0">
          <children>
-            <Label fx:id="lblSaldo" layoutX="85.0" layoutY="2.0" prefHeight="25.0" prefWidth="178.0" text="CURRENT BALANCE">
+            <Label fx:id="lblCurrentBalance" layoutX="85.0" layoutY="2.0" prefHeight="25.0" prefWidth="178.0" text="CURRENT BALANCE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblSaldo" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="36.0" prefHeight="52.0" prefWidth="330.0" stylesheets="@../estilos/styleHome.css" text="34645,45 €">
+            <Label fx:id="lblSaldo" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="36.0" prefHeight="52.0" prefWidth="330.0" stylesheets="@../estilos/styleHome.css" text="0€">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -76,7 +76,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblNumeroGastos" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="47.0" prefHeight="50.0" prefWidth="207.0" text="-450,62 €" textOverrun="CLIP">
+            <Label fx:id="lblNumeroGastos" alignment="CENTER" contentDisplay="CENTER" layoutX="8.0" layoutY="47.0" prefHeight="50.0" prefWidth="207.0" text="0€" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -89,7 +89,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="lblNumeroIngresos" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="51.0" prefHeight="50.0" prefWidth="207.0" text="+1554,45 €">
+            <Label fx:id="lblNumeroIngresos" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="51.0" prefHeight="50.0" prefWidth="207.0" text="0€">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

@@ -1,6 +1,10 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,9 +19,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Users;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class logincontroller implements Initializable {
@@ -45,6 +52,10 @@ public class logincontroller implements Initializable {
 
     @FXML
     private PasswordField pswdContrasenya;
+
+    @FXML
+    private PasswordField pswdRegistrerContrasenya;
+
 
 
     @FXML
@@ -90,17 +101,39 @@ public class logincontroller implements Initializable {
     }
 
     @FXML
-    void Registrar(ActionEvent event) {
-        Users user = new Users(txtLoginUsername.getText(), pswdContrasenya.getText());
+    void registrar(ActionEvent event) {
+        String username = txtRegistrerUsername.getText();
+        String password = pswdRegistrerContrasenya.getText();
 
-        Gson gson = new Gson();
-        String json = gson.toJson(user);
+        if (username.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Por favor, rellene todos los campos");
+            alert.showAndWait();
+            return;
+        }
 
         try {
-            FileWriter writer = new FileWriter("usuarios.json");
-            writer.write(json);
+            Users user = new Users(username, password);
+            List<Users> users = new ArrayList<>();
+            users.add(user);
+            FileReader reader = new FileReader("users.json");
+            JsonParser parser = new JsonParser();
+            JsonElement json = parser.parse(reader);
+            JsonArray jsonArray = json.getAsJsonArray();
+
+            Gson gson = new Gson();
+            String nuevoUser = gson.toJson(user);
+            JsonElement nuevoUserElement = new JsonParser().parse(nuevoUser);
+            jsonArray.add(nuevoUserElement);
+
+            FileWriter writer = new FileWriter("users.json");
+            gson.toJson(jsonArray, writer);
             writer.close();
-        } catch (IOException e) {
+
+            txtLoginUsername.setText(txtRegistrerUsername.getText());
+            pswdContrasenya.setText(pswdRegistrerContrasenya.getText());
+            transicionLoginInversa(event);
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }

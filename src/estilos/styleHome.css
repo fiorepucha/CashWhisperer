@@ -32,7 +32,7 @@
     -fx-border-radius: 15px 15px 15px 15px;
     -fx-background-radius:15px 15px 15px 15px;
 }
-#lblSaldo,#lblResumenGastos,#lblResumenIngresos,#lblNumeroGastos,#lblNumeroIngresos{
+#lblCurrentBalance,#lblSaldo,#lblResumenGastos,#lblResumenIngresos,#lblNumeroGastos,#lblNumeroIngresos{
     -fx-text-align:center;
     -fx-text-fill: white;
     -fx-font-weigth:bold;

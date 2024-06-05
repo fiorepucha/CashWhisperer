@@ -15,7 +15,7 @@
 }
 
 
-#btnGastos,#btnIngresos:hover,#btnHome:hover{
+#btnGastos:hover,#btnIngresos,#btnHome:hover{
     -fx-background-color: white;
     -fx-border-width: 0px 0px 0px 4px;
     -fx-border-color: #f538ff;
@@ -39,7 +39,7 @@
 }
 
 #cboxCategorias{
-    -fx-background-color:linear-gradient(to right, #F6CEF6,#F132B7);
+    -fx-background-color:linear-gradient(to right, #C6F7F9,#0928e6);
     -fx-prompt-text-fill: #FFF;
     /*bordes de varios colores*/
     -fx-border-width: 4px 4px 4px 4px;
@@ -53,11 +53,20 @@
     -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
     -fx-background-radius: 50px 50px 50px 50px;
     -fx-padding: 10px; /* margen interno para el contenido */
-    -fx-blackground-color:linear-gradient(to right, #e4e6f2,#aeb8f5);
+    -fx-blackground-color:linear-gradient(to right, black,white);
 
 }
 #btnAnyadirGasto:pressed{
+    -fx-blackground-color:linear-gradient(to right, pink,yellow);
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
+    -fx-background-radius: 50px 50px 50px 50px;
+}
+#btnAnyadirGasto{
     -fx-blackground-color:linear-gradient(to right, #4058ed,#0928e6);
+    -fx-border-width: 4px 4px 4px 4px;
+    -fx-border-radius: 50px 50px 50px 50px; /* todas las esquinas y bordes */
+    -fx-background-radius: 50px 50px 50px 50px;
 }
 
 

@@ -52,6 +52,9 @@ public class Home {
     private Pane paneMenu;
 
     @FXML
+    private Label lblCurrentBalance;
+
+    @FXML
     private Pane paneSaldo;
 
     @FXML
@@ -80,6 +83,25 @@ public class Home {
             root = loader.load();
             Gastos gastosController = loader.getController();
             gastosController.setUsuarioActual(user);
+            System.out.println("nombre: " + user.getUsername());
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void abrirVentanaIngresos(ActionEvent event) {
+        Users user = usuarioActual;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ingresos.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+            Ingresos ingresosController = loader.getController();
+            ingresosController.setUsuarioActual(user);
             System.out.println("nombre: "+user.getUsername());
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -88,6 +110,5 @@ public class Home {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

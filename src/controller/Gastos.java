@@ -7,12 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Categorias;
+import model.Gasto;
 import model.Users;
 
 import java.io.IOException;
@@ -183,6 +185,36 @@ public class Gastos implements Initializable {
         lblNumeroUsuarioGastos.setText(cadena+"€");
 
     }
+    @FXML
+    void aniadeGasto(ActionEvent event) {
+
+       // System.out.println(gasto.getCantidad());
+        //System.out.println(gasto.getCategoria());
+
+        //comprobar que el usuario elija una categoria
+        if (cboxCategorias.getValue() == null || lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
+            if (cboxCategorias.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Debe elegir una categoría");
+                alert.showAndWait();
+            }
+
+            //comprobar que el usuario elija una cantidad
+            if (lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Debe introducir una cantidad");
+                alert.showAndWait();
+            }
+
+        }else {
+            Gasto gasto = new Gasto(lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
+            System.out.println(gasto.getCantidad());
+            System.out.println(gasto.getCategoria());
+        }
+
+    }
 
 
     private Users usuarioActual;
@@ -212,6 +244,25 @@ public class Gastos implements Initializable {
             e.printStackTrace();
         }
 
+    }
+    @FXML
+    void abrirVentanaIngresos(ActionEvent event) {
+        Users user = usuarioActual;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ingresos.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+            Ingresos ingresosController = loader.getController();
+            ingresosController.setUsuarioActual(user);
+            System.out.println("nombre: "+user.getUsername());
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
