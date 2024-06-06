@@ -1,0 +1,42 @@
+[
+  {
+    "cantidad": "-4€",
+    "categoria": "ENTERTAINMENT",
+    "usuario": {
+      "username": "fiore",
+      "password": "123"
+    }
+  },
+  {
+    "cantidad": "-24.69€",
+    "categoria": "FOOD",
+    "usuario": {
+      "username": "fiore",
+      "password": "123"
+    }
+  },
+  {
+    "cantidad": "-4€",
+    "categoria": "SHOPPING",
+    "usuario": {
+      "username": "fiore",
+      "password": "123"
+    }
+  },
+  {
+    "cantidad": "-5€",
+    "categoria": "FOOD",
+    "usuario": {
+      "username": "fiore",
+      "password": "123"
+    }
+  },
+  {
+    "cantidad": "-5€",
+    "categoria": "GIFTS",
+    "usuario": {
+      "username": "andres",
+      "password": "aaa"
+    }
+  }
+]

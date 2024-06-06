@@ -1,0 +1,18 @@
+[
+  {
+    "cantidad": "50€",
+    "categoria": "ENTERTAINMENT",
+    "usuario": {
+      "username": "fiore",
+      "password": "123"
+    }
+  },
+  {
+    "cantidad": "3€",
+    "categoria": "GIFTS",
+    "usuario": {
+      "username": "andres",
+      "password": "aaa"
+    }
+  }
+]

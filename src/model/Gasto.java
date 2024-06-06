@@ -1,10 +1,13 @@
 package model;
 
+import model.Users;
+
 public class Gasto {
         private String cantidad;
         private String categoria;
 
         private Users usuario;
+
 
 
         public Gasto(String cantidad, String categoria, Users usuario) {
@@ -31,6 +34,9 @@ public class Gasto {
             this.categoria = categoria;
         }
 
-    }
+        public String getUsuario() {
+            return usuario.getUsername();
+        }
+}
 
 

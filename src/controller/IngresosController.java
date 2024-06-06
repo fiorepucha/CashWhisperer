@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +16,18 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Categorias;
 import model.Gasto;
+import model.Ingreso;
 import model.Users;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import model.Categorias;
-
-public class Gastos implements Initializable {
+public class IngresosController implements Initializable {
 
     @FXML
     private Button btnGastos;
@@ -85,6 +89,9 @@ public class Gastos implements Initializable {
     @FXML
     private Button btnAnyadirGasto;
 
+    private List<Ingreso> ingresos = new ArrayList<>();
+
+
     @FXML
     void agregarComa(ActionEvent event) {
         String cadena = lblNumeroUsuarioGastos.getText();
@@ -109,7 +116,7 @@ public class Gastos implements Initializable {
 
     @FXML
     void agregarDigito1(ActionEvent event) {
-       String cadena = lblNumeroUsuarioGastos.getText();
+        String cadena = lblNumeroUsuarioGastos.getText();
         cadena = agregarDigito(cadena,1);
         lblNumeroUsuarioGastos.setText(cadena);
     }
@@ -185,36 +192,6 @@ public class Gastos implements Initializable {
         lblNumeroUsuarioGastos.setText(cadena+"€");
 
     }
-    @FXML
-    void aniadeGasto(ActionEvent event) {
-
-       // System.out.println(gasto.getCantidad());
-        //System.out.println(gasto.getCategoria());
-
-        //comprobar que el usuario elija una categoria
-        if (cboxCategorias.getValue() == null || lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
-            if (cboxCategorias.getValue() == null) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("Debe elegir una categoría");
-                alert.showAndWait();
-            }
-
-            //comprobar que el usuario elija una cantidad
-            if (lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("Debe introducir una cantidad");
-                alert.showAndWait();
-            }
-
-        }else {
-            Gasto gasto = new Gasto(lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
-            System.out.println(gasto.getCantidad());
-            System.out.println(gasto.getCategoria());
-        }
-
-    }
 
 
     private Users usuarioActual;
@@ -233,7 +210,7 @@ public class Gastos implements Initializable {
 
         try {
             root = loader.load();
-            Home controller = loader.getController();
+            HomeController controller = loader.getController();
             controller.setUsuarioActual(user);
             System.out.println("nombre: "+user.getUsername());
             Scene scene = new Scene(root);
@@ -246,16 +223,16 @@ public class Gastos implements Initializable {
 
     }
     @FXML
-    void abrirVentanaIngresos(ActionEvent event) {
+    void abrirVentanaGastos(ActionEvent event) {
         Users user = usuarioActual;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ingresos.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/gastos.fxml"));
         Parent root;
 
         try {
             root = loader.load();
-            Ingresos ingresosController = loader.getController();
-            ingresosController.setUsuarioActual(user);
-            System.out.println("nombre: "+user.getUsername());
+            GastosController gastosController = loader.getController();
+            gastosController.setUsuarioActual(user);
+            System.out.println("nombre: " + user.getUsername());
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -264,6 +241,57 @@ public class Gastos implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void aniadeIngreso(ActionEvent event) {
+        //comprobar que el usuario elija una categoria
+        if (cboxCategorias.getValue() == null || lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
+            if (cboxCategorias.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Debe elegir una categoría");
+                alert.showAndWait();
+            }
+
+            //comprobar que el usuario elija una cantidad
+            if (lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Debe introducir una cantidad");
+                alert.showAndWait();
+            }
+
+        }else {
+            Ingreso ingreso = new Ingreso(lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
+            System.out.println(ingreso.getCantidad());
+            System.out.println(ingreso.getCategoria());
+            try {
+                String cantidad = ingreso.getCantidad();
+                String nombre = ingreso.getCategoria();
+                Users usuario = usuarioActual;
+
+                //Users user = new Users(username, password);
+
+                ingresos.add(ingreso);
+                FileReader reader = new FileReader("ingresos.json");
+                JsonParser parser = new JsonParser();
+                JsonElement json = parser.parse(reader);
+                JsonArray jsonArray = json.getAsJsonArray();
+
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                String nuevoGasto = gson.toJson(ingreso);
+                JsonElement nuevoGastoElement = new JsonParser().parse(nuevoGasto);
+                jsonArray.add(nuevoGastoElement);
+
+                FileWriter writer = new FileWriter("ingresos.json");
+                gson.toJson(jsonArray, writer);
+                writer.close();
+
+            }catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        }
 
 
     @Override
@@ -281,4 +309,5 @@ public class Gastos implements Initializable {
         }
     }
 }
+
 

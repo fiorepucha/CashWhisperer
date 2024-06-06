@@ -1,10 +1,6 @@
 package controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
+import com.google.gson.*;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,17 +56,23 @@ public class logincontroller implements Initializable {
 
     @FXML
     void transicionLogin(ActionEvent event) { //la imagen se moverá hasta el borde izquierdo de la ventana
+        lnkSignUp.setMouseTransparent(true);
+
         TranslateTransition imgTransition = new TranslateTransition(Duration.millis(500), imgLogin);
         imgTransition.setByX(-300);
         imgTransition.play();
+        imgTransition.setOnFinished(e -> lnkSignUp.setMouseTransparent(false));
+
     }
 
 
     @FXML
     void transicionLoginInversa(ActionEvent event) {
+        lnkLogin.setMouseTransparent(true);
         TranslateTransition imgTransition = new TranslateTransition(Duration.millis(500), imgLogin);
         imgTransition.setByX(300);
         imgTransition.play();
+        imgTransition.setOnFinished(e -> lnkLogin.setMouseTransparent(false));
     }
 
     @FXML
@@ -81,20 +83,49 @@ public class logincontroller implements Initializable {
             alert.showAndWait();
 
         }else {
-            Users user = new Users(txtLoginUsername.getText(), pswdContrasenya.getText());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
-            Parent root;
+            //comprobar si el usuario y la contrasenya estan en el json
+            Users user = null;
+            for (Users u : Users.getUsers()) {
+                if (txtLoginUsername.getText().equals(u.getUsername()) && pswdContrasenya.getText().equals(u.getPassword())) {
+                    user = u;
+                }
 
-            try {
-                root = loader.load();
-                Home homeController = loader.getController();
-                homeController.setUsuarioActual(user);
-                System.out.println("nombre: "+user.getUsername());
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
+            }
+            try{
+                FileReader reader = new FileReader("users.json");
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(reader);
+                JsonArray jsonArray = jsonElement.getAsJsonArray();
+                boolean encontrado = false;
+                for (JsonElement json : jsonArray) {
+                    JsonObject jsonObject = json.getAsJsonObject();
+                    if (jsonObject.get("username").getAsString().equals(txtLoginUsername.getText()) && jsonObject.get("password").getAsString().equals(pswdContrasenya.getText())) {
+                        encontrado = true;
+                        user = new Users(jsonObject.get("username").getAsString(), jsonObject.get("password").getAsString());
+                    }
+                }
+                if (encontrado){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/home.fxml"));
+                    Parent root;
+
+                    try {
+                        root = loader.load();
+                        HomeController homeController = loader.getController();
+                        homeController.setUsuarioActual(user);
+                        System.out.println("nombre: "+user.getUsername());
+                        Scene scene = new Scene(root);
+                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Usuario o contrasenya incorrectos");
+                    alert.showAndWait();
+                }
+            }catch (IOException e) {
                 e.printStackTrace();
             }
         }

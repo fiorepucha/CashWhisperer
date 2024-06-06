@@ -29,4 +29,8 @@ public class Ingreso {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+
+    public String getUsuario() {
+        return usuario.getUsername();
+    }
 }
