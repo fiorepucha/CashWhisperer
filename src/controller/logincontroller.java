@@ -112,7 +112,6 @@ public class logincontroller implements Initializable {
                         root = loader.load();
                         HomeController homeController = loader.getController();
                         homeController.setUsuarioActual(user);
-                        System.out.println("nombre: "+user.getUsername());
                         Scene scene = new Scene(root);
                         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         stage.setScene(scene);

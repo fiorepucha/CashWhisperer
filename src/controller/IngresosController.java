@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Categorias;
@@ -89,6 +91,10 @@ public class IngresosController implements Initializable {
     @FXML
     private Button btnAnyadirGasto;
 
+    @FXML
+    private ImageView imgCerrarSesion;
+
+    private List<Gasto> gastos = new ArrayList<>();
     private List<Ingreso> ingresos = new ArrayList<>();
 
 
@@ -212,7 +218,8 @@ public class IngresosController implements Initializable {
             root = loader.load();
             HomeController controller = loader.getController();
             controller.setUsuarioActual(user);
-            System.out.println("nombre: "+user.getUsername());
+            controller.setIngresos(ingresos);
+            controller.setGastos(gastos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -232,7 +239,8 @@ public class IngresosController implements Initializable {
             root = loader.load();
             GastosController gastosController = loader.getController();
             gastosController.setUsuarioActual(user);
-            System.out.println("nombre: " + user.getUsername());
+            gastosController.setIngresos(ingresos);
+            gastosController.setGastos(gastos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -263,8 +271,6 @@ public class IngresosController implements Initializable {
 
         }else {
             Ingreso ingreso = new Ingreso(lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
-            System.out.println(ingreso.getCantidad());
-            System.out.println(ingreso.getCategoria());
             try {
                 String cantidad = ingreso.getCantidad();
                 String nombre = ingreso.getCategoria();
@@ -287,6 +293,14 @@ public class IngresosController implements Initializable {
                 gson.toJson(jsonArray, writer);
                 writer.close();
 
+                // Mostrar alerta de confirmación
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Éxito");
+                alert.setContentText("Se ha introducido correctamente");
+                alert.showAndWait();
+
+                lblNumeroUsuarioGastos.setText("0€");
+
             }catch (IOException e) {
                 e.printStackTrace();
             }
@@ -307,6 +321,30 @@ public class IngresosController implements Initializable {
             cadenaSinEuros = cadena.substring(0, cadena.length() - 1);
             return cadenaSinEuros + digito + "€";
         }
+    }
+    @FXML
+    void cerrarSesion(MouseEvent event) {
+        // Cerrar la ventana actual (Home), o Gastos o Ingresos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/login.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setGastos(List<Gasto> gastos) {
+        this.gastos = gastos;
+    }
+
+    public void setIngresos(List<Ingreso> ingresos) {//setIngresos
+        this.ingresos = ingresos;
     }
 }
 

@@ -16,7 +16,7 @@
    <children>
       <Pane fx:id="paneMenu" layoutY="35.0" prefHeight="480.0" prefWidth="168.0" stylesheets="@../estilos/styleGastos.css">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgCerrarSesion" fitHeight="30.0" fitWidth="30.0" layoutX="69.0" layoutY="435.0" onMouseClicked="#cerrarSesion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/btnLogout.png" />
                </image>
@@ -135,7 +135,7 @@
             </Button>
          </children>
       </GridPane>
-      <ComboBox fx:id="cboxCategorias" layoutX="587.0" layoutY="122.0" prefHeight="54.0" prefWidth="184.0" promptText="CATEGORÍAS" stylesheets="@../estilos/styleGastos.css" />
-      <Button fx:id="btnAnyadirGasto" layoutX="624.0" layoutY="440.0" mnemonicParsing="false" onAction="#aniadeGasto" prefHeight="50.0" prefWidth="111.0" stylesheets="@../estilos/styleIngresos.css" text="Añadir gasto" />
+      <ComboBox fx:id="cboxCategorias" layoutX="587.0" layoutY="122.0" prefHeight="54.0" prefWidth="184.0" promptText="CATEGORIES" stylesheets="@../estilos/styleGastos.css" />
+      <Button fx:id="btnAnyadirGasto" layoutX="624.0" layoutY="440.0" mnemonicParsing="false" onAction="#aniadeGasto" prefHeight="50.0" prefWidth="111.0" stylesheets="@../estilos/styleIngresos.css" text="Add Expense" />
    </children>
 </AnchorPane>

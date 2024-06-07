@@ -2,41 +2,34 @@ package model;
 
 import model.Users;
 
-public class Gasto {
-        private String cantidad;
-        private String categoria;
+import java.time.LocalDate;
+
+public class Gasto extends Movimiento{
 
         private Users usuario;
 
 
 
         public Gasto(String cantidad, String categoria, Users usuario) {
-            this.cantidad = "-"+cantidad;
-            this.categoria = categoria;
+            super(cantidad, categoria);
             this.usuario = usuario;
+        }
+
+        @Override
+        public String getCantidad() {
+            return super.getCantidad();
         }
 
         // Getters y setters
 
-        public String getCantidad() {
-            return cantidad;
-        }
-
-        public void setCantidad(String cantidad) {
-            this.cantidad = cantidad;
-        }
-
-        public String getCategoria() {
-            return categoria;
-        }
-
-        public void setCategoria(String categoria) {
-            this.categoria = categoria;
-        }
 
         public String getUsuario() {
             return usuario.getUsername();
         }
+
+    public Object getUsuarioUsername() {
+            return this.usuario.getUsername();
+    }
 }
 
 

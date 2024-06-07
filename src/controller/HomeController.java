@@ -2,6 +2,10 @@ package controller;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,12 +15,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Gasto;
 import model.Ingreso;
+import model.Movimiento;
 import model.Users;
 
 import java.io.FileReader;
@@ -58,6 +66,9 @@ public class HomeController implements Initializable {
     private ImageView imgHombreFeliz;
 
     @FXML
+    private ImageView imgHombreTriste;
+
+    @FXML
     private Label lblWelcomeUsuario;
 
     @FXML
@@ -70,7 +81,7 @@ public class HomeController implements Initializable {
     private Pane paneSaldo;
 
     @FXML
-    private TableView<?> tableMovimientos;
+    private TableView<Movimiento> tableMovimientos;
 
     @FXML
     private Pane paneResumGastos;
@@ -78,11 +89,22 @@ public class HomeController implements Initializable {
     @FXML
     private Pane paneResumIngresos;
 
+    @FXML
+    private ImageView imgCerrarSesion;
+
+    @FXML
+    private TableColumn<?, ?> colCategoria;
+
+    @FXML
+    private TableColumn<?, ?> colImporte;
+
     private Users usuarioActual;
 
     private List<Gasto> gastos = new ArrayList<>();
 
     private List<Ingreso> ingresos = new ArrayList<>();
+    private ObservableList<Movimiento> movimientos;
+
 
     public void setUsuarioActual(Users u1){
         this.usuarioActual = u1;
@@ -90,8 +112,26 @@ public class HomeController implements Initializable {
         cargarGastos();
         cargarIngresos();
         cargarSaldo();
+        actualizarTablaMovimientos();
+
 
     }
+
+    private void actualizarTablaMovimientos() {
+        movimientos.clear();
+        for (Gasto g : gastos) {
+            if (g.getUsuarioUsername().equals(usuarioActual.getUsername())) {
+                movimientos.add(g);
+            }
+        }
+        for (Ingreso i : ingresos) {
+            if (i.getUsuarioUsername().equals(usuarioActual.getUsername())) {
+                movimientos.add(i);
+            }
+        }
+        tableMovimientos.setItems(movimientos);
+    }
+
 
 
 
@@ -105,9 +145,8 @@ public class HomeController implements Initializable {
             root = loader.load();
             GastosController gastosController = loader.getController();
             gastosController.setUsuarioActual(user);
-            System.out.println("nombre: " + user.getUsername());
-            System.out.println("1");
             gastosController.setGastos(gastos);
+            gastosController.setIngresos(ingresos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -126,7 +165,8 @@ public class HomeController implements Initializable {
             root = loader.load();
             IngresosController ingresosController = loader.getController();
             ingresosController.setUsuarioActual(user);
-            System.out.println("nombre: "+user.getUsername());
+            ingresosController.setIngresos(ingresos);
+            ingresosController.setGastos(gastos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -167,6 +207,7 @@ public class HomeController implements Initializable {
 
     private void guardarTotalGastos() {
         double total = 0;
+        DecimalFormat df = new DecimalFormat("#.##");
         //recorre la lista de gastos con un for each
         for (Gasto g : gastos) {
             //comprueba si el gasto es del usuario actual
@@ -180,7 +221,7 @@ public class HomeController implements Initializable {
                 total += cantidad;
             }
         }
-        lblNumeroGastos.setText(total+"€");
+        lblNumeroGastos.setText(df.format(total)+"€");
     }
 
     public void setIngresos(List<Ingreso> ingresos) {
@@ -190,6 +231,8 @@ public class HomeController implements Initializable {
 
     private void guardarTotalIngresos() {
         double total = 0;
+        DecimalFormat df = new DecimalFormat("#.##");
+
         //recorre la lista de gastos con un for each
         for (Ingreso g : ingresos) {
             //comprueba si el gasto es del usuario actual
@@ -203,7 +246,7 @@ public class HomeController implements Initializable {
                 total += cantidad;
             }
         }
-        lblNumeroIngresos.setText(total+"€");
+        lblNumeroIngresos.setText(df.format(total)+"€");
     }
 
     private void cargarDatos() {
@@ -228,14 +271,45 @@ public class HomeController implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        imgHombreFeliz.setVisible(false);
+        imgHombreTriste.setVisible(false);
+
+        //iniciar las columnas de la tabla
+        colImporte.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        colCategoria.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+
+        movimientos = FXCollections.observableArrayList();
+        //crear lista de movimientos y añadir algunos datos de
         cargarDatos(); // Cargar los datos de gastos aquí
+        movimientos.addAll(gastos);
+        movimientos.addAll(ingresos);
+        tableMovimientos.setItems(movimientos);
+
+        lblSaldo.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Convertir el valor del saldo a un número
+                double saldo = Double.parseDouble(newValue.replace("€", "").replace(",", "."));
+
+                // Si el saldo es mayor que 0, mostrar la imagen feliz, sino mostrar la triste
+                if (saldo > 0) {
+                    imgHombreFeliz.setVisible(true);
+                    imgHombreTriste.setVisible(false);
+                } else {
+                    imgHombreFeliz.setVisible(false);
+                    imgHombreTriste.setVisible(true);
+                }
+            }
+        });
+
     }
 
 
     private void cargarGastos() {
-        System.out.println("Cargando gastos");
+        DecimalFormat df = new DecimalFormat("#.##");
         if (usuarioActual == null) {
             System.out.println("usuarioActual es null");
             return;
@@ -252,11 +326,13 @@ public class HomeController implements Initializable {
                 total += Double.parseDouble(g.getCantidad().substring(0, g.getCantidad().length() - 1));
             }
         }
-        lblNumeroGastos.setText(total + "€");
+
+        lblNumeroGastos.setText(df.format(total) + "€");
     }
 
     private void cargarIngresos() {
-        System.out.println("Cargando ingresos");
+        DecimalFormat df = new DecimalFormat("#.##");
+
         if (usuarioActual == null) {
             System.out.println("usuarioActual es null");
             return;
@@ -273,7 +349,8 @@ public class HomeController implements Initializable {
                 total += Double.parseDouble(i.getCantidad().substring(0, i.getCantidad().length() - 1));
             }
         }
-        lblNumeroIngresos.setText(total + "€");
+
+        lblNumeroIngresos.setText(df.format(total) + "€");
     }
 
     private void cargarSaldo() {
@@ -284,7 +361,28 @@ public class HomeController implements Initializable {
         gastos = lblNumeroGastos.getText().substring(0, lblNumeroGastos.getText().length() - 1);
         ingresos = lblNumeroIngresos.getText().substring(0, lblNumeroIngresos.getText().length() - 1);
 
+        gastos = gastos.replace(",", ".");
+        ingresos = ingresos.replace(",", ".");
+
+
         total = Double.parseDouble(gastos) + Double.parseDouble(ingresos);
         lblSaldo.setText(df.format(total) + "€");
+    }
+
+    @FXML
+    void cerrarSesion(MouseEvent event) {
+        // Cerrar la ventana actual (Home), o Gastos o Ingresos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/login.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

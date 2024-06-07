@@ -12,10 +12,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Categorias;
 import model.Gasto;
+import model.Ingreso;
 import model.Users;
 
 import java.io.FileReader;
@@ -84,11 +87,15 @@ public class GastosController implements Initializable {
 
     @FXML
     private ComboBox<Categorias> cboxCategorias;
+    @FXML
+    private ImageView imgCerrarSesion;
 
     @FXML
     private Button btnAnyadirGasto;
 
     private List<Gasto> gastos = new ArrayList<>();
+
+    private List<Ingreso> ingresos = new ArrayList<>();
 
     @FXML
     void agregarComa(ActionEvent event) {
@@ -193,9 +200,6 @@ public class GastosController implements Initializable {
     @FXML
     void aniadeGasto(ActionEvent event) {
 
-       // System.out.println(gasto.getCantidad());
-        //System.out.println(gasto.getCategoria());
-
         //comprobar que el usuario elija una categoria
         if (cboxCategorias.getValue() == null || lblNumeroUsuarioGastos.getText().equals("0.0€") || lblNumeroUsuarioGastos.getText().equals("0€")) {
             if (cboxCategorias.getValue() == null) {
@@ -214,15 +218,11 @@ public class GastosController implements Initializable {
             }
 
         }else {
-            Gasto gasto = new Gasto(lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
-            System.out.println(gasto.getCantidad());
-            System.out.println(gasto.getCategoria());
+            Gasto gasto = new Gasto("-"+lblNumeroUsuarioGastos.getText(),cboxCategorias.getValue().toString(),usuarioActual);
             try {
                 String cantidad = gasto.getCantidad();
                 String nombre = gasto.getCategoria();
                 Users usuario = usuarioActual;
-
-                //Users user = new Users(username, password);
 
                 gastos.add(gasto);
                 FileReader reader = new FileReader("gastos.json");
@@ -238,6 +238,13 @@ public class GastosController implements Initializable {
                 FileWriter writer = new FileWriter("gastos.json");
                 gson.toJson(jsonArray, writer);
                 writer.close();
+                // Mostrar alerta de confirmación
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Éxito");
+                alert.setContentText("Se ha introducido correctamente");
+                alert.showAndWait();
+
+                lblNumeroUsuarioGastos.setText("0€");
 
             }catch (IOException e) {
                 e.printStackTrace();
@@ -266,16 +273,15 @@ public class GastosController implements Initializable {
             root = loader.load();
             HomeController controller = loader.getController();
             controller.setUsuarioActual(user);
-            System.out.println("nombre: "+user.getUsername());
             controller.setGastos(gastos);
+            controller.setIngresos(ingresos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+            stage.setScene(scene); 
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     @FXML
     void abrirVentanaIngresos(ActionEvent event) {
@@ -287,7 +293,8 @@ public class GastosController implements Initializable {
             root = loader.load();
             IngresosController ingresosController = loader.getController();
             ingresosController.setUsuarioActual(user);
-            System.out.println("nombre: "+user.getUsername());
+            ingresosController.setGastos(gastos);
+            ingresosController.setIngresos(ingresos);
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -301,7 +308,6 @@ public class GastosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cboxCategorias.getItems().addAll(Categorias.values());
-        System.out.println("2");
     }
 
     public static String agregarDigito(String cadena, int digito) {
@@ -313,8 +319,26 @@ public class GastosController implements Initializable {
             return cadenaSinEuros + digito + "€";
         }
     }
+    @FXML
+    void cerrarSesion(MouseEvent event) {
+        // Cerrar la ventana actual (Home), o Gastos o Ingresos
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/login.fxml"));
+        Parent root;
+
+        try {
+            root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void setGastos(List<Gasto> gastos) {
         this.gastos = gastos;
     }
-}
-
+    public void setIngresos(List<Ingreso> ingresos){
+        this.ingresos = ingresos;
+    }
+} 
